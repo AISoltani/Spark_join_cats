@@ -15,8 +15,6 @@ def parse_record(s):
     except:
         pass
 
-
-
 parsed_data = sc.textFile("youtube.txt").map(parse_record).filter(lambda x: x != None).cache()
 file = open("output.txt", 'a')
 p2 = parsed_data.map(lambda x:[x.uploader, x.category]).distinct().groupByKey().filter(lambda x:len(x[1])>1).count() 
